@@ -17,11 +17,6 @@ PKG_MAINTAINER:=Jasper van Bourgognie <jasper@lab-nation.com>
 PKG_LICENSE:=GPL
 PKG_LICENSE_FILES:=COPYING
 
-#PKG_FIXUP:=autoreconf
-#PKG_REMOVE_FILES:=conftools/libtool.m4
-
-$(eval $(echo blabl))
-
 include $(INCLUDE_DIR)/package.mk
 
 define Package/smartscopeserver
