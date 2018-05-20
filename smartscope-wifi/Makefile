@@ -33,7 +33,7 @@ endef
 
 define Package/smartscope-wifi/install
 	$(INSTALL_DIR) $(1)/etc/uci-defaults
-	sed ./25_enable_wireless.template -e 's/SSID=/SSID=$(CONFIG_SMARTSCOPE_WIFI_SSID)/g' > ./25_enable_wireless
+	sed ./25_enable_wireless.template -e 's;SSID=;SSID=$(CONFIG_SMARTSCOPE_WIFI_SSID);g' > ./25_enable_wireless
 	$(INSTALL_DATA) ./25_enable_wireless $(1)/etc/uci-defaults/25_enable_wireless
 endef
 
