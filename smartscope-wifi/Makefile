@@ -17,15 +17,24 @@ define Package/smartscope-wifi
   CATEGORY:=Utilities
   TITLE:=SmartScope wifi config
   URL:=http://www.lab-nation.com/
+  MENU:=1
 endef
 
 define Package/smartscope-wifi/description
  Enable wifi by default and set ssid to SmartScope XXXX
 endef
 
+define Package/smartscope-wifi/config
+	config SMARTSCOPE_WIFI_SSID
+		depends on PACKAGE_smartscope-wifi
+		string "SSID"
+		default "SmartScope `strings /dev/mtd1|grep SSID1|cut -d '_' -f 2`"
+endef
+
 define Package/smartscope-wifi/install
 	$(INSTALL_DIR) $(1)/etc/uci-defaults
-	$(INSTALL_DATA) ./25_enable_wireless $(1)/etc/uci-defaults
+	sed ./25_enable_wireless.template 's/SSID=/SSID=$(SMARTSCOPE_WIFI_SSID)/g' > ./25_enable_wireless
+	$(INSTALL_DATA) ./25_enable_wireless $(1)/etc/uci-defaults/25_enable_wireless
 endef
 
 define Build/Compile
