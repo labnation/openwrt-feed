@@ -3,7 +3,7 @@
 SSID=
 
 uci set wireless.@wifi-device[0].disabled=0
-uci set wireless.@wifi-iface[0].ssid="${SSID_SUFFIX}"
+uci set wireless.@wifi-iface[0].ssid="${SSID}"
 uci commit wireless
 wifi
 
