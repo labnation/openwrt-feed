@@ -29,12 +29,25 @@ define Package/smartscope-wifi/config
 		depends on PACKAGE_smartscope-wifi
 		string "SSID"
 		default "SmartScope `strings /dev/mtd1|grep SSID1|cut -d '_' -f 2`"
+
+	config SMARTSCOPE_RESET_WIFI
+		depends on PACKAGE_smartscope-wifi
+		bool "Reset button resets wifi"
+		help
+			Pressing the reset button <1s resets the wifi to its default settings
+		default y
 endef
 
 define Package/smartscope-wifi/install
 	$(INSTALL_DIR) $(1)/etc/uci-defaults
 	sed ./99_enable_wireless.template -e 's;SSID=;SSID=$(CONFIG_SMARTSCOPE_WIFI_SSID);g' > ./99_enable_wireless
 	$(INSTALL_DATA) ./99_enable_wireless $(1)/etc/uci-defaults/99_enable_wireless
+
+ifeq ($(CONFIG_SMARTSCOPE_RESET_WIFI),y)
+	$(INSTALL_DIR) $(1)/etc/hotplug.d/button
+	sed ./buttons.sh.template -e 's;SSID=;SSID=$(CONFIG_SMARTSCOPE_WIFI_SSID);g' > ./buttons.sh
+	$(INSTALL_DATA) ./buttons.sh $(1)/etc/hotplug.d/button/buttons.sh
+endif
 endef
 
 define Build/Compile

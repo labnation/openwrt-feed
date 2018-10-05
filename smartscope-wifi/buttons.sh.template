@@ -1,0 +1,39 @@
+#!/bin/sh
+. /lib/functions.sh
+
+if [ "$BUTTON" = "BTN_0" ]; then
+  OVERLAY="$( grep ' /overlay ' /proc/mounts )"
+
+  case "$ACTION" in
+  pressed)
+    [ -z "$OVERLAY" ] && return 0
+
+    return 5
+  ;;
+  timeout)
+    . /etc/diag.sh
+    set_state failsafe
+  ;;
+  released)
+    if [ "$SEEN" -lt 1 ]
+    then
+      logger Reverting to wifi access point
+      SSID=
+      uci delete wireless.default_radio0.bssid
+      uci delete wireless.default_radio0.key
+      uci set wireless.default_radio0.network=lan
+      uci set wireless.default_radio0.mode=ap
+      uci set wireless.default_radio0.ssid="${SSID}"
+      uci set wireless.default_radio0.encryption=none
+      uci commit wireless
+      wifi
+    elif [ "$SEEN" -ge 5 -a -n "$OVERLAY" ]
+    then
+      echo "FACTORY RESET" > /dev/console
+      jffs2reset -y && reboot &
+    fi
+  ;;
+  esac
+fi
+
+return 0
