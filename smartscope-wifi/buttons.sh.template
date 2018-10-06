@@ -31,6 +31,10 @@ if [ "$BUTTON" = "BTN_0" ]; then
     then
       echo "FACTORY RESET" > /dev/console
       jffs2reset -y && reboot &
+    else
+      echo "REBOOT" > /dev/console
+      sync
+      reboot
     fi
   ;;
   esac
