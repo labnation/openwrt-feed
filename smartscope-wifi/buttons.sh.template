@@ -27,6 +27,9 @@ if [ "$BUTTON" = "BTN_0" ]; then
       uci set wireless.default_radio0.encryption=none
       uci commit wireless
       wifi
+
+      #Restart smartscopeserver
+      killall -SIGHUP smartscopeserver
     elif [ "$SEEN" -ge 5 -a -n "$OVERLAY" ]
     then
       echo "FACTORY RESET" > /dev/console
