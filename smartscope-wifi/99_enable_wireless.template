@@ -18,4 +18,7 @@ uci set wireless.@wifi-iface[0].ssid="${SSID}"
 uci commit wireless
 wifi
 
+uci set network.lan.ipaddr='10.10.48.1'
+uci commit network
+
 exit 0
