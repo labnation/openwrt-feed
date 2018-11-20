@@ -1,7 +1,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=smartscopeserver
-PKG_VERSION:=1.3
+PKG_VERSION:=1.4
 PKG_RELEASE:=1
 PKG_INSTALL:=1
 PKG_BUILD_DIR:=$(BUILD_DIR)/smartscopeserver-$(PKG_VERSION)
