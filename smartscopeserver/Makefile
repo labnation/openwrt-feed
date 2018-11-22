@@ -1,7 +1,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=smartscopeserver
-PKG_VERSION:=1.5
+PKG_VERSION:=1.6
 PKG_RELEASE:=1
 PKG_INSTALL:=1
 PKG_BUILD_DIR:=$(BUILD_DIR)/smartscopeserver-$(PKG_VERSION)
@@ -9,7 +9,7 @@ PKG_BUILD_DIR:=$(BUILD_DIR)/smartscopeserver-$(PKG_VERSION)
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL=git://github.com/labnation/DeviceInterface.CXX
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
-PKG_SOURCE_VERSION=v$(PKG_VERSION)
+PKG_SOURCE_VERSION=master
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 
 PKG_MAINTAINER:=Jasper van Bourgognie <jasper@lab-nation.com>
