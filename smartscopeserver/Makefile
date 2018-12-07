@@ -35,7 +35,7 @@ define Package/smartscopeserver/install
 	$(INSTALL_DIR) $(1)/etc/init.d
 	$(INSTALL_BIN) ./smartscope.init $(1)/etc/init.d/smartscope
 	$(INSTALL_DIR) $(1)/usr/bin
-	$(CP) $(PKG_BUILD_DIR)/build/smartscopeserver $(1)/usr/bin/
+	$(CP) $(PKG_BUILD_DIR)/smartscopeserver $(1)/usr/bin/
 endef
 
 define Build/Compile
