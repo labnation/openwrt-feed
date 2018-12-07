@@ -42,4 +42,8 @@ define Build/Compile
 	$(call Build/Compile/Default,LEDE=1)
 endef
 
+define Build/Install
+	$(call Build/Install/Default,LEDE=1)
+endef
+
 $(eval $(call BuildPackage,smartscopeserver))
